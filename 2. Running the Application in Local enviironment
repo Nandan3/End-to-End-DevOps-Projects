@@ -2,8 +2,7 @@
     type: t2.large
     storage: 30GB
 
-    https://onedrive.live.com/view.aspx?resid=2CE84407029E1955%21s8d5d75c78eab4be5902fd67a115f7399&id=documents&wd=target%28Mega%20Project.one%7CA6CD7075-1D06-4745-A478-3304E7E0A62B%2FMega%20DevOps%20Project%20-%201%7CF492695C-BA80-456E-BC1E-D4527C60CBCD%2F%29&wdpartid={C1B538AC-B2A8-4469-8FAA-168A90EF5F6C}{1}&wdsectionfileid=2CE84407029E1955!s2e1e12427e5343f7a280e68fef786860&end
-onenote:https://d.docs.live.net/2ce84407029e1955/Documents/Devops%20_%20Cloud%20Engineer/Mega%20Project.one#Mega%20DevOps%20Project%20-%201&section-id={A6CD7075-1D06-4745-A478-3304E7E0A62B}&page-id={F492695C-BA80-456E-BC1E-D4527C60CBCD}&object-id={3D7797A6-7CEE-4575-977C-98DE19679B73}&3A
+    
     
 2. $sudo usermod -aG docker ubuntu           # adding ubuntu user to the docker group
   
