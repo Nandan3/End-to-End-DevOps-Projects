@@ -1,9 +1,8 @@
-#
-This repository contains the OpenTelemetry Astronomy Shop, a microservice-based distributed system intended to illustrate the implementation of OpenTelemetry in a near real-world environment.
+🎯 This repository contains the OpenTelemetry Astronomy Shop, a microservice-based distributed system intended to illustrate the implementation of OpenTelemetry in a near real-world environment.
 
 Welcome to the OpenTelemetry Astronomy Shop Project Demonstration:
 
-Here the goals are:
+📌 Here the goals are:
 1. Realistic Distributed System Example
   This repository demonstrates a real-world, microservice-based distributed application using the OpenTelemetry Astronomy Shop, designed to showcase end-to-end observability in modern cloud-native systems.
 
@@ -17,7 +16,7 @@ Here the goals are:
   This project mirrors how organizations design, instrument, and monitor microservice architectures, helping learners understand real-world implementation patterns and best practices.
 
 
-Pre-requisites:
+📌 Pre-requisites:
   1. Docker installed
   2. kubectl installed
   3. AWS CLI installed
@@ -27,7 +26,7 @@ Pre-requisites:
   7. Github actions config
 
 
-Tools used to implement the application:
+📌 Tools used to implement the application:
   1. Containerise the micro-service using "Docker"
   2. AWS services used - EC2 instance, IAM roles & policies, EKS cluster, Route53, VPC, Subnets
   3. Kubernetes for managing the containerised micro-services.
@@ -35,4 +34,12 @@ Tools used to implement the application:
   5. Implemented the CI using Github Actions and CD using ArgoCD
   6. Used Ingress and Ingress Controller to explose the application to external world.
   7. Helm chart for dowoading and installing the softwares and dependencies.
+
+📌 What You Will Learn:
+  1. Cloud Infrastructure Setup – Learn how to configure and deploy a cloud environment for DevOps implementation.
+  2. Understanding the Project & SDLC – Gain in-depth knowledge of software development lifecycles in microservices-based architectures.
+  3. Containerization with Docker – Learn how to package and manage applications efficiently using Docker.
+  4. Docker Compose Setup – Manage multi-container applications with Docker Compose.
+  5. Kubernetes for Orchestration – Deploy and manage containers at scale using Kubernetes.
+  6. Infrastructure as Code (IaC) with Terraform – Automate and manage cloud infrastructure effortlessly.
 
