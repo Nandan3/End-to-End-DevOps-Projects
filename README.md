@@ -43,3 +43,7 @@ Welcome to the OpenTelemetry Astronomy Shop Project Demonstration:
   5. Kubernetes for Orchestration – Deploy and manage containers at scale using Kubernetes.
   6. Infrastructure as Code (IaC) with Terraform – Automate and manage cloud infrastructure effortlessly.
 
+Refer the Application architecture: https://opentelemetry.io/docs/demo/architecture/
+Refer the Source code of the application: https://github.com/open-telemetry/opentelemetry-demo
+Overview of microservices used in the project: https://opentelemetry.io/docs/demo/services/
+
