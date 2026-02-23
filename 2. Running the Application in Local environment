@@ -1,0 +1,44 @@
+Follow the steps below:
+
+	§ Create EC2 Instance:
+	type: t2.large
+	storage: 30GB
+	
+	
+	
+	§ Resize File system: (if running out of space while creating the application)
+		1. Increase the instance volume to 30GB
+		
+		
+		
+		2. Change the file system in CLI
+		 $lsblk
+		
+		
+		$sudo apt install cloud-guest-utils
+		$sudo growpart /dev/xvda 1
+		$sudo resize2fs /dev/xvda1
+	
+	§ If you face any issue related to "permission denied", while executing the docker commands. Add the user to docker group using:
+	$sudo usermod -aG docker ubuntu
+	
+	§ Running the application local environment using docker compose:
+	
+	Why docker compose?
+	I'm deploying e-commerce application, which contains multiple micro-services. So we containerize and running as one model using docker compose is efficient.
+	It runs multiple containers at once and establish the dependencies between the containers.
+	
+	You will find the docker-compose.yaml file in my github repository
+	Link: https://github.com/Nandan3/End-to-End-DevOps-Projects/blob/main/docker-compose.yaml
+	
+	Run the below command
+	$docker compose up -d
+	
+	Edit security groups inbound rules to access the application from web browser
+		
+	Access the application using: http://<public-ip>:8080
+	Public-IP: EC2 Public IP
+
+More detailed steps follow my blog: 
+	
+	
