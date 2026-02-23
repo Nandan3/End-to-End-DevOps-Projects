@@ -4,16 +4,11 @@ Follow the steps below:
 	type: t2.large
 	storage: 30GB
 	
-	
-	
 	§ Resize File system: (if running out of space while creating the application)
 		1. Increase the instance volume to 30GB
 		
-		
-		
 		2. Change the file system in CLI
 		 $lsblk
-		
 		
 		$sudo apt install cloud-guest-utils
 		$sudo growpart /dev/xvda 1
@@ -39,6 +34,6 @@ Follow the steps below:
 	Access the application using: http://<public-ip>:8080
 	Public-IP: EC2 Public IP
 
-More detailed steps follow my blog: 
+More detailed steps, refer my blog: https://dev.to/nandan_007/containerize-and-run-an-e-commerce-based-application-in-aws-eks-cluster-with-all-best-practices-348o
 	
 	
