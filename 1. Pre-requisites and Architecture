@@ -64,3 +64,16 @@
 
           Verify Terraform Installation:
           terraform -help
+----------
+
+# Project architecture diagram and the explaination is available at the below link.
+
+1. Architecture
+```
+https://opentelemetry.io/docs/demo/architecture/
+```
+
+2. Overview of microservices used in the project
+```
+https://opentelemetry.io/docs/demo/services/
+```
