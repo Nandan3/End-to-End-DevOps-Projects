@@ -1,0 +1,99 @@
+🎯 Containerize the multiple Micro-services using Dockerfiles:
+	
+This is an e-commerce based application, which contains multiple micro-services. Each micro-services are developed using different programming languages. For example
+
+	1. Product-catalogue service: Go lang
+	2. Ad service: Java
+	3. Recommendation service: Python
+	
+So I took 3 micro-services from different programming language, where I containerize the micro-services using Dockerfile and build the images.
+
+Product-catalog service: (Go programming language)
+	1. $sudo apt install golang-go     
+	2. Files: go.mod & go.sum - takes care of dependencies
+	
+	Build the service in local using below steps:
+		a. $export PRODUCT_CATALOG_PORT=8088
+		b. $go build -o product-catalog .
+		c. $./product-catalog
+		
+		O/P:
+		INFO[0000] Loaded 10 products
+		INFO[0000] Product Catalog gRPC server started on port: 8088
+	
+	Run the below commands to build the image and to run the container:
+		a. $docker build -t nandandocker07/product-catalog:v1 .
+		
+		-t >> tag (docker-hub-user)/repo-name:version
+		. >> location of dockerfile
+		
+		b. $docker run nandandocker07/product-catalog:v1
+		
+Ad-service: (Java programming language)
+	1. Build using gradle or maven
+	2. File: gradlew (gradle wrapper for Linux & Mac) or gradlew.bat (for windows) takes care of dependencies.
+	File: pom.xml (take care of dependencies in case of maven)
+	
+	Build the service in local using below steps:
+		a. Install java:
+		$sudo apt install openjdk-21-jre-headless
+		b. Give permission to gradlew file
+		$chmod +x gradlew
+		c. Run the below command:
+		$./gradlew installDist
+			
+			ü Start the gradle daemon, which is like a server
+			ü Install the dependencies 
+			ü Perform code compilation 
+			ü Build the application and stored in perticular directory
+	
+	Run the below commands to build the image and to run the container:
+		a. $docker build -t nandandocker07/ad-service:v1 .
+	
+		b. $docker run nandandocker07/ad-service:v1
+		
+Recommendation service: (Python programming language)
+	1. File: requirments.txt take care of dependencies
+	
+	Run the below commands to build the image and to run the container:
+		a. $docker build -t nandandocker07/recommandation-service:v1 .
+
+		b. $docker run nandandocker07/recommandation-service:v1
+		
+Push the docker images into docker hub: (registry or container artifactory)
+	1. Registries are: dockerhub, quay.io, ECR, ACR, GHCR
+	
+	2. First login to registry where you want to push the image
+	Eg:
+	$docker login docker.io
+	$docker login quay.io
+	$docker login ARN <URL/Num>         #AWS
+	
+	3. Push the image using below command
+	$docker tag docker.io/nandandocker07/product-catalog:v1
+	$docker push docker.io/nandandocker07/product-catalog:v1
+	
+	docker.io >> docker hub registry
+	nandandocker07 >> registry user name
+	product-catalog >> repo name
+	:v1 >> tag of the image
+	
+Preparation of docker-compose file to run the entire environment:
+	1. Main components of docker-compose.yml
+		ü Service object >> define how to pull or run the micro-services
+		ü Network object >> create network for all micro-services
+		ü Volume object
+	
+	2. You will find the docker-compose.yaml file in my github repository
+	Link: https://github.com/Nandan3/End-to-End-DevOps-Projects/blob/main/docker-compose.yaml
+	
+	3. Run the application using docker compose commands
+	$docker compose up -d
+	
+	Access the application using: http://<public-ip>:8080
+	Public-IP: EC2 Public IP
+
+For more detailed steps refer my blog: https://dev.to/nandan_007/containerize-and-run-an-e-commerce-based-application-in-aws-eks-cluster-with-all-best-practices-4nb0
+	
+
+	
