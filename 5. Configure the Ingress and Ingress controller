@@ -1,0 +1,62 @@
+configure the Ingress and Ingress controller to expose the application into internet:
+
+Why Ingress and Ingress Controller:
+
+Configuration of LB is not declarative or lack of declarative approach Eg: if I want to change from http to https, I have to do it in AWS UI not in svc.yaml manifest.
+Not cost effective Eg: if 10 microservice require external access, AWS will 10 LB
+CCM only tied to AWS or any cloud provider LB, what about F5, nginx, Envy, Traffik
+LB type will not work in mini-kube, kind, k3d
+Ingress:
+
+It helps you to define routing rules for incoming traffic
+Declarative (yaml) - LB can be updated and modified
+Cost effective - using path based & host based routing, we can route the request 100's of target groups
+Not dependent on CCM - by using reverse proxy or other mechanism
+Creation of Ingress & Ingress Controller:
+
+Create Ingress resource for Front-end service >> creation of ALB Ingress controller (AWS), which reads the ingress resource >> accordingly ALB Ingress controller creates LB for us.
+Steps to install ALB ingress controller on EKS cluster:
+
+ALB ingress controller is pod within the EKS cluster >> it creates an elastic LB >> creates only if service account of the ALB binds to the IAM roles or policies >> it binds through "IAM OIDC connector or provider"
+Install eksctl in CLI
+Make sure you are in correct cluster
+ 
+Follow the steps to set up OIDC provider and ALB controller: https://github.com/Nandan3/End-to-End-DevOps-Projects/blob/main/kubernetes_files/kubernetes-ingress-controller
+oidc_id: D9F38304FBE9AFF51F006DE59DEC4993
+Check if there is an IAM OIDC provider configured already [adding OIDC provider to my cluster]
+
+Create service account & IAM role & policy and attach it to SA:
+
+Download IAM policy.json from AWS for ELB
+Link: curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.11.0/docs/install/iam_policy.json
+
+Create IAM role and attach them to a service account created previously.
+
+
+Use Helm chart to download ALB controller:
+
+Add helm repo for eks
+$helm repo add eks https://aws.github.io/eks-charts
+
+Install ALB controllers using helm & verify that the deployments are running.
+
+$helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=my-eks-cluster --set serviceAccount.create=false --set serviceAccount.name=aws-load-balancer-controller --set region=us-west-1 --set vpcId=vpc-09bcf1df61d87cf8b
+
+Setup Ingress resources and access the Project:
+
+Using ingress, access the project as external user
+Change the type of the LB in frontendproxy service yaml $kubectl edit svc opentelemetry-demo-frontendproxy
+
+Create ingress resource using yaml manifest: Link of yaml file: https://github.com/Nandan3/End-to-End-DevOps-Projects/blob/main/kubernetes_files/ingress.yaml
+Run: $kubectl apply -f ingress.yaml
+
+
+Accessing the application using IP address or DNS will not work until it will add it in local DNS file
+
+Steps to add IP & DNS into local DNS file:
+
+In linux: add it in /etc/hosts
+In windows: a. Open notepad as administrator >> file -> open -> select C:\windows\system32\drivers\etc\hosts file add C:\windows
+
+More detailed steps refer my blog: https://dev.to/nandan_007/containerize-and-run-an-e-commerce-based-application-in-aws-eks-cluster-with-all-best-practices-8m8
+ 
