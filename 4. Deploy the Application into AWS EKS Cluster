@@ -1,0 +1,72 @@
+Deploy the Application into AWS EKS Cluster:
+
+Why AWS EKS?
+ü Upgrades becomes easy
+ü Manage control plane
+ü Scaling become easy
+ü Integrated K8s UI
+ü Cost efficient
+
+Creating the following infrastructure using Terraform:
+
+VPC, Public subnet and Private subnet
+Internet gateway, NAT gateway, Route tables
+EKS cluster
+Create S3 bucket and DynamoDB for state file management and locking:
+
+
+Create VPC & EKS cluster using Terraform:
+VPC & Cluster creation code: https://github.com/Nandan3/End-to-End-DevOps-Projects/tree/main/EKS_install
+
+Cluster information:
+
+cluster_endpoint = "https://D9F38304FBE9AFF51F006DE59DEC4993.gr7.us-west-1.eks.amazonaws.com"
+cluster_name = "my-eks-cluster"
+vpc_id = "vpc-09bcf1df61d87cf8b"
+Run the following command to create the cluster:
+
+$terraform init
+$terraform plan
+$terraform apply --auto-approve
+ 
+How to connect to 1 or many Kubernetes clusters from command line ?
+
+Cluster info are stored in kube-config files $kubectl config view $kubectl config current-context #context represents the cluster $kubectl config use-context #switch between the clusters
+$cat ~/.aws/credentials >> Path where aws credentials are stored
+
+$aws eks update-kubeconfig --region us-west-1 --name my-eks-cluster
+
+o/p:
+Added new context arn:aws:eks:us-west-1:454842419673:cluster/my-eks-cluster to /home/ubuntu/.kube/config
+Context >> complete K8s related information (creates kube-config file)
+
+$kubectl config view
+$kubectl config current-context
+$kubectl get nodes
+
+Deploying Project on K8:
+1. EKS cluster creation is completed.
+2. Check in CLI
+$kubectl config current-context
+
+Create a service account:
+
+$kubectl apply -f complete-deploy.yaml
+$kubectl get pods
+
+How one micro-services are connected another in this project?
+
+By using environment variables ü Service name or URL is injected via ConfigMap ü Application reads it at runtime
+Eg:
+If want to connect shipping service to quote service, in the environment variable of shipping pod have service name of the quote service
+
+Other ways: ü By using service discovery mechanism using services ü DNS-Based Service Discovery (Implicit - Kubernetes automatically creates DNS entries for Services.) ü Headless Services (Direct Pod-to-Pod) [When to use - Stateful apps (Kafka, Cassandra), Client needs individual Pod identities]
+Access the project from outside the VPC/Cluster:
+
+Change service type to LB mode to access via internet: $kubectl edit svc opentelemetry-demo-frontendproxy Add - type: LoadBalancer
+
+more detailed steps, refer: https://dev.to/nandan_007/containerize-and-run-an-e-commerce-based-application-in-aws-eks-cluster-with-all-best-practices-pfh
+
+ 
+
+ 
